@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartV2", "StartV2.csproj", "{37EC489C-EB1F-47FD-97A0-32046B046D51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37EC489C-EB1F-47FD-97A0-32046B046D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37EC489C-EB1F-47FD-97A0-32046B046D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37EC489C-EB1F-47FD-97A0-32046B046D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37EC489C-EB1F-47FD-97A0-32046B046D51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
