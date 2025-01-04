@@ -1,0 +1,8 @@
+﻿{
+  "solution": {
+    "path": "proiect poo.sln",
+    "projects": [
+      "proiect poo\\proiect poo.csproj"
+    ]
+  }
+}
