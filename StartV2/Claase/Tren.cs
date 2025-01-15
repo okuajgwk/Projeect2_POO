@@ -7,14 +7,13 @@ public abstract class Tren
     private int Capacity { get; set; }
     private List<string> Wagons { get; set; } = new List<string>();
 
-    protected Tren(string id, int number, int capacity, List<string> wagons)
+    protected Tren(string id, int number, int capacity)
     {
         ID = id;
         Number = number;
         Capacity = capacity;
-        Wagons = wagons;
     }
-    
-    
-    
+
+    public abstract int CalculatePrice();
+ 
 }
