@@ -1,4 +1,4 @@
-namespace StartV2.Claase;
+namespace StartV2.Trenuuri;
 
 public abstract class Tren
 {
