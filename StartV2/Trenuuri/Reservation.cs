@@ -13,10 +13,10 @@ public class Reservation
         ReservationTime = DateTime.Now;//folosesc datetime.now ca sa setez momentul rezervarii
     }
 
-    public bool CancelReservation()
+  /*  public bool CancelReservation()
     {
         return (Route.Station[0].DepartureTime - DateTime.Now).TotalHours >= 24;
         //prin linia asta verific daca ora de plecare a trenului din prima statie este >= 24h mai tarziu decat momentul curent 
         
-    }
+    }*/
 }
