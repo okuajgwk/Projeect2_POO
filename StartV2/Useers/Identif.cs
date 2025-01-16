@@ -16,7 +16,7 @@ public class Identif
     }
 
  
-    private void LoadUsers()
+    public void LoadUsers()
     {
         Console.WriteLine("Încercăm să încărcăm utilizatorii din fișier...");
         try
@@ -50,7 +50,7 @@ public class Identif
         }
     }
 
-    private void SaveUsersToFile()
+    public void SaveUsersToFile()
     {
         try
         {
@@ -130,7 +130,7 @@ public class Identif
         }
     }
 
-    private bool IsValidEmail(string email)
+    public bool IsValidEmail(string email)
     {
         try
         {
