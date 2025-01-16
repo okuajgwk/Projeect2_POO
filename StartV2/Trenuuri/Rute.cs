@@ -10,7 +10,7 @@ public class Rute
     {
         NameRoute = nameRoute;
         ScheduleStation = scheduleStation;
+        
     }
-    
     
 }
