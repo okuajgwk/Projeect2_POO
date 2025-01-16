@@ -2,34 +2,26 @@ namespace StartV2;
 
 public class MeniuPrincipal
 {
-    public void Cont(int opt1)
+    public void Cont(int opt1, int opt2)
     {
-        Console.WriteLine("1. Creare cont administrator");
-        Console.WriteLine("2. Logare administrator");
-        Console.WriteLine("3. Creare cont utilizator");
-        Console.WriteLine("4. Logare utilizator");
+        Console.WriteLine("1. Creare cont");
+        Console.WriteLine("2. Log in");
         Console.WriteLine("Alegeți o opțiune: ");
         
         MeniuPrincipal meniuprincipal = new MeniuPrincipal();
-        string opt = Console.ReadLine();
+        string opt1 = Console.ReadLine();
         bool running = true;
         while (running)
         {
-            switch (opt)
+            switch (opt1)
             {
                 case "1":
-                    Console.WriteLine("1. Creare cont administrator");
+                    Console.WriteLine("1. Creare cont");
                     break;
                 case "2":
-                    Console.WriteLine("2. Logare administrator");
+                    Console.WriteLine("2. Log in");
                     break;
                 case "3":
-                    Console.WriteLine("3. Creare cont utilizator");
-                    break;
-                case "4":
-                    Console.WriteLine("4. Logare utilizator");
-                    break;
-                case "5":
                     Console.WriteLine("Iesire");
                     running = false;
                     break;
