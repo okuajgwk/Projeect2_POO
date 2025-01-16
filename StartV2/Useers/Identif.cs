@@ -1,21 +1,21 @@
 using System.Text.Json; 
 using System.IO;
-using StartV2.Useers;
 
-namespace StartV2.Users;
+namespace StartV2.Useers;
 
 public class Identif
 {
     private const string FilePath = "users.json";
-    private const string AdminDomain = "@admin.com"; 
+    private const string AdminDomain = "@admin.com";
     private List<User> users;
-    
+
     public Identif()
     {
         users = new List<User>();
         LoadUsers();
     }
-    
+
+ 
     private void LoadUsers()
     {
         Console.WriteLine("Încercăm să încărcăm utilizatorii din fișier...");
@@ -26,7 +26,16 @@ public class Identif
                 string json = File.ReadAllText(FilePath);
                 Console.WriteLine($"JSON citit: {json}");
                 users = JsonSerializer.Deserialize<List<User>>(json) ?? new List<User>();
-                Console.WriteLine("Utilizatorii au fost încărcați cu succes.");
+
+                // Validare și eliminare utilizatori incorecți sau incompleți
+                users = users.Where(u => u != null && 
+                                         !string.IsNullOrEmpty(u.email) && 
+                                         !string.IsNullOrEmpty(u.userFirstName) &&
+                                         !string.IsNullOrEmpty(u.userLastName) && 
+                                         !string.IsNullOrEmpty(u.password))
+                    .ToList();
+
+                Console.WriteLine("Utilizatorii au fost încărcați și validați cu succes.");
             }
             else
             {
@@ -40,11 +49,19 @@ public class Identif
             users = new List<User>();
         }
     }
-    
+
     private void SaveUsersToFile()
     {
         try
         {
+            // Verifică și creează directorul dacă lipsește
+            string? directoryPath = Path.GetDirectoryName(FilePath);
+            if (!string.IsNullOrWhiteSpace(directoryPath) && !Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            // Scrie lista utilizatorilor în fișierul JSON
             string json = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(FilePath, json);
             Console.WriteLine("Utilizatorii au fost salvați cu succes în fișier.");
@@ -54,8 +71,8 @@ public class Identif
             Console.WriteLine($"Eroare la salvarea utilizatorilor: {ex.Message}");
         }
     }
-    
-    public void AddUser(string email, string password, string firstName, string lastName)
+
+    public void AddUser(string userLastName, string userFirstName, string email, string password)
     {
         if (string.IsNullOrEmpty(email) || !IsValidEmail(email))
         {
@@ -69,13 +86,18 @@ public class Identif
             return;
         }
 
+        if (users.Exists(u => u != null && u.email != null && u.email.Equals(email, StringComparison.OrdinalIgnoreCase)))
+        {
+            Console.WriteLine($"Un utilizator cu email-ul {email} există deja în sistem.");
+            return;
+        }
+        
         if (users.Exists(u => u.email.Equals(email, StringComparison.OrdinalIgnoreCase)))
         {
             Console.WriteLine($"Un utilizator cu email-ul {email} există deja în sistem.");
             return;
         }
 
-        
         string userType = email.EndsWith(AdminDomain, StringComparison.OrdinalIgnoreCase) ? "admin" : "user";
 
         if (userType == "admin")
@@ -87,13 +109,11 @@ public class Identif
             Console.WriteLine($"Email-ul {email} nu aparține domeniului {AdminDomain}. Este adăugat ca 'user'.");
         }
 
-       
-        users.Add(new User(email, password, firstName, lastName, userType));
+        users.Add(new User(userLastName, userFirstName, email, password, userType)); // Corecție în ordinea parametrilor
         SaveUsersToFile();
         Console.WriteLine($"Utilizatorul cu email-ul {email} a fost adăugat cu succes.");
     }
 
-   
     public void ListUsers()
     {
         if (users.Count == 0)
@@ -105,13 +125,21 @@ public class Identif
         Console.WriteLine("Lista utilizatorilor:");
         foreach (var user in users)
         {
-            Console.WriteLine($"Email: {user.email}, Tip: {user.userType}, Nume: {user.userFirstName} {user.userLastName}");
+            Console.WriteLine(
+                $"Email: {user.email}, Tip: {user.userType}, Nume: {user.userFirstName} {user.userLastName}");
         }
     }
 
-  
     private bool IsValidEmail(string email)
     {
-        return email.Contains("@") && email.Contains(".");
+        try
+        {
+            var addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
