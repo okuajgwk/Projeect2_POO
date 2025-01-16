@@ -14,6 +14,6 @@ public abstract class Tren
         Capacity = capacity;
     }
 
-    public abstract int CalculatePrice();
+    //public abstract int CalculatePrice();
  
 }
