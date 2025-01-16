@@ -2,21 +2,41 @@ namespace StartV2.Trenuuri;
 
 public class Reservation
 {
-    public Route Route { get; set; }
-    public List<string> SeatNr { get; set; }=new List<string>();
-    public DateTime ReservationTime { get; set; }
+    public string IDReservation { get; set; }
+    public string User { get; set; }
+    public Route ReservedRoute { get; set; }
+    public string SeatType { get; set; }
+    public int SeatNumber { get; set; }
+    public DateTime ReservationDate { get; set; }
 
-    public Reservation(Route route, List<string> seatNr)
+    public Reservation(string iDReservation, string user, Route reservedRoute, string seatType, int seatNumber,
+        DateTime reservationDate)
     {
-        Route = route;
-        SeatNr = seatNr;
-        ReservationTime = DateTime.Now;//folosesc datetime.now ca sa setez momentul rezervarii
+        IDReservation = iDReservation;
+        User = user;
+        ReservedRoute = reservedRoute;
+        SeatType = seatType;
+        SeatNumber = seatNumber;
+        ReservationDate = reservationDate;
     }
 
-  /*  public bool CancelReservation()
+    public void ShowReservationDetails()
     {
-        return (Route.Station[0].DepartureTime - DateTime.Now).TotalHours >= 24;
-        //prin linia asta verific daca ora de plecare a trenului din prima statie este >= 24h mai tarziu decat momentul curent 
+        Console.WriteLine($"Detalii rezervare(ID: {IDReservation}): ");
+        Console.WriteLine($"Utilizator : {User}");
+        Console.WriteLine($"Ruta : {ReservedRoute.nameRoute}");
+        Console.WriteLine($"Tip de loc: {SeatType}, Numar locuri: {SeatNumber}");
+        Console.WriteLine($"Data Rezervarii: {ReservationDate}");
+    }
+
+    public string ConfirmationMessage()
+    {
+        return $"Rezervarea a fost realizata cu succes!ID Rezervare: {IDReservation}";
         
-    }*/
+    }
+
+    public string CancelMessage()
+    {
+        return $"Rezervarea cu ID {IDReservation} a fost anulata.";
+    }
 }

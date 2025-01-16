@@ -1,24 +1,41 @@
+using System.Drawing;
+
 namespace StartV2.Trenuuri;
 
 public class Route
 {
-    private string NameRoute { get; set; }
-    private List<string> StationList { get; set; } = new List<string>();
-    private int ScheduleStation { get; set; }
-    private Tren TrenRoute { get; set; }
-    private decimal BasePrice { get; set; }
-    public object Station { get; set; }
+    private string NameRoute;
+    public List<Station> Stations { get; set; }
+    public TimeSpan Duration { get; set; }
+    public Dictionary<string, decimal> Prices { get; set; } //preturi pt categorii de locuri gen clasa 1 sau clasa 2
 
-    public Route(string nameRoute, decimal basePrice, Tren trenRoute, int scheduleStation)
+    public string nameRoute
+    {
+        get => NameRoute;
+        set=>NameRoute = value;
+    }
+    public Route(string nameRoute, List<Station> stations, TimeSpan duration, Dictionary<string, decimal> prices)
     {
         NameRoute = nameRoute;
-        BasePrice = basePrice;
-        TrenRoute = trenRoute;
+        Stations = stations;
+        Duration = duration;
+        Prices = prices;
     }
 
-    public void AddStation(Station station)
+    public void ShowRouteDetails()
     {
-        StationList.Add(station.Name);
+        Console.WriteLine($"Detalii : {NameRoute}");
+        Console.WriteLine($"Statii: ");
+        foreach (var station in Stations)
+        {
+            Console.WriteLine(station);
+        }
 
+        Console.WriteLine($"Durata totala a calatoriei este: {Duration}");
+        Console.WriteLine("Preturi: ");
+        foreach (var price in Prices)
+        {
+            Console.WriteLine($"{price.Key}: {price.Value} lei ");
+        }
     }
 }
