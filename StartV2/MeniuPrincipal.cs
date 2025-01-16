@@ -1,12 +1,15 @@
+using StartV2.Useers;
+
 namespace StartV2;
 
 public class MeniuPrincipal
 {
+    private Identif identif = new Identif();
     public void Cont()
     {
         Console.WriteLine("1. Creare cont");
         Console.WriteLine("2. Log in");
-        Console.WriteLine("Alegeți o opțiune: ");
+        Console.WriteLine("Alegeti o optiune: ");
 
         MeniuPrincipal meniuprincipal = new MeniuPrincipal();
         string opt1 = Console.ReadLine();
@@ -26,7 +29,53 @@ public class MeniuPrincipal
                     running = false;
                     break;
                 default:
-                    Console.WriteLine("Opțiune invalidă. Încercați din nou.");
+                    Console.WriteLine("Optiune invalida. Incercati din nou.");
+                    break;
+            }
+        }
+    }
+
+    public void CreareCont(string args)
+    {
+        Console.WriteLine("-----Sistem de gestionare utilizatori-----");
+        bool running = true;
+        while (running)
+        {
+
+            Console.WriteLine("1. Adaugare utilizator");
+            Console.WriteLine("2. Listare utilizatori");
+            Console.WriteLine("Iesire");
+            Console.WriteLine("Alegeti o optiune: ");
+            
+            string option = Console.ReadLine();
+
+            switch (option)
+            {
+                case "1":
+                    Console.WriteLine("Adaugare utilizator:");
+                    Console.Write("Email: "); 
+                    string email = Console.ReadLine();
+                    Console.Write("Parolă: ");
+                    string password = Console.ReadLine();
+                    Console.Write("Prenume: ");
+                    string firstName = Console.ReadLine();
+                    Console.Write("Nume: ");
+                    string lastName = Console.ReadLine();
+
+                    Identif.AddUser(lastName, firstName, email, password);
+                    break;
+
+                case "2":
+                    Identif.ListUsers();
+                    break;
+
+                case "3":
+                    running = false;
+                    Console.WriteLine("La revedere!");
+                    break;
+
+                default:
+                    Console.WriteLine("Opțiune invalida.");
                     break;
             }
         }
@@ -41,7 +90,7 @@ public class MeniuPrincipal
         Console.WriteLine("4. Gestionare trenuri");
         Console.WriteLine("5. Semnalare intarziere");
         Console.WriteLine("6. Iesire");
-        Console.WriteLine("Alegeți o opțiune: ");
+        Console.WriteLine("Alegeti o optiune: ");
 
         string opt2 = Console.ReadLine();
         bool running = true;
@@ -69,7 +118,7 @@ public class MeniuPrincipal
                     running = false;
                     break;
                 default:
-                    Console.WriteLine("Opțiune invalidă. Încercați din nou.");
+                    Console.WriteLine("Optiune invalida. Incercati din nou.");
                     break;
             }
         }
@@ -80,7 +129,7 @@ public class MeniuPrincipal
             Console.WriteLine("1. Cautare ruta");
             Console.WriteLine("2. Cumparati bilet");
             Console.WriteLine("3. Iesire");
-            Console.WriteLine("Alegeți o opțiune: ");
+            Console.WriteLine("Alegeti o optiune: ");
 
             string opt2 = Console.ReadLine();
             bool running = true;
@@ -100,7 +149,7 @@ public class MeniuPrincipal
                         running = false;
                         break;
                     default:
-                        Console.WriteLine("Opțiune invalidă. Încercați din nou.");
+                        Console.WriteLine("Optiune invalida. Incercati din nou.");
                         break;
                 }
             }
