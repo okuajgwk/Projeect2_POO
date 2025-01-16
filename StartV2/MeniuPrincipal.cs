@@ -40,21 +40,64 @@ public class MeniuPrincipal
         Console.WriteLine("3. Stergere ruta");
         Console.WriteLine("4. Gestionare trenuri");
         Console.WriteLine("5. Semnalare intarziere");
+        Console.WriteLine("6. Iesire");
         Console.WriteLine("Alegeți o opțiune: ");
         
-        
+        string opt2 = Console.ReadLine();
+        bool running = true;
+        while (running)
+        {
+            switch (opt2)
+            {
+                case "1":
+                    Console.WriteLine("1. Adaugare ruta");
+                    break;
+                case "2":
+                    Console.WriteLine("2. Modificare ruta");
+                    break;
+                case "3":
+                    Console.WriteLine("3. Stergere ruta");
+                    break;
+                case "4":
+                    Console.WriteLine("4. Gestionare trenuri");
+                    break;
+                case "5":
+                    Console.WriteLine("5. Semnalare intarziere");
+                    break;
+                case "6":
+                    Console.WriteLine("Iesire");
+                    running = false;
+                    break;
+                default:
+                    Console.WriteLine("Opțiune invalidă. Încercați din nou.");
+                    break;
     }
     
     public void MeniuUser(int opt2)
     {
-        Console.WriteLine("-----Meniu Utilizator-----");
-        Console.WriteLine("1. Cautare ruta");
-        Console.WriteLine("2. Cumparati bilet");
-        Console.WriteLine("3. Iesire");
-        Console.WriteLine("Alegeți o opțiune: ");
-        
-    }
-    
-    
+        bool running = true;
+        while (running)
+        {
+            Console.WriteLine("-----Meniu Utilizator-----");
+            Console.WriteLine("1. Cautare ruta");
+            Console.WriteLine("2. Cumparati bilet");
+            Console.WriteLine("3. Iesire");
+            Console.WriteLine("Alegeți o opțiune: ");
 
+            case "1":
+            Console.WriteLine("1. Cautare ruta");
+            break;
+            case "2":
+            Console.WriteLine("2. Cumparati bilet");
+            break;
+            case "3":
+            Console.WriteLine("3. Iesire");
+            break;
+            running = false;
+            break;
+            default:
+            Console.WriteLine("Opțiune invalidă. Încercați din nou.");
+            break;
+        }
+    }
 }
