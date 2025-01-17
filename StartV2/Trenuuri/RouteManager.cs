@@ -27,7 +27,7 @@ public class RouteManager
 }
 static void AddRoute(List<Route> routes, List<Station>stations)
 {
-    // adaug o ruta
+    // functia asta creeaza o noua ruta si o adauga in lista rutelor 
     Console.Clear();
     Console.WriteLine("Adăugați o rută:");
 
@@ -69,7 +69,7 @@ static void AddRoute(List<Route> routes, List<Station>stations)
 }
  static void SearchRoutes(List<Route> allRoutes, string departureStation, string arrivalStation,
         bool directRoute)
-    {
+    {//cauta rute directe intre doua statii date de utilizator
         var foundRoutes = new List<Route>();
         foreach (var route in allRoutes)
         {
@@ -104,7 +104,7 @@ static void AddRoute(List<Route> routes, List<Station>stations)
                             $"  {station.Name}-Arrival :{station.ArrivalTime},Departure :{station.DepartureTime}");
 
                     }
-
+//daca gasim ruta afisez nume ruta durata si pret+detalii statii
                     Console.WriteLine();
                 }
             }
