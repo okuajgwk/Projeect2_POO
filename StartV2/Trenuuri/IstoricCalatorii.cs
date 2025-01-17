@@ -1,8 +1,11 @@
+using StartV2.Useers;
+
 namespace StartV2.Trenuuri;
 
 public class IstoricCalatorii
 {
     private const string FolderIstoric = "IstoricCalatorii";
+    Helper help = new Helper();
 
     public IstoricCalatorii()
     {
@@ -19,7 +22,7 @@ public class IstoricCalatorii
     
      public void AddToHistory(string email, string routeName, DateTime travelDate, decimal price, string seatType)
     {
-        string fileName = GetFileName(email);
+        string fileName = Helper.GetFileName(email);
         string historyEntry = $"Data: {travelDate:yyyy-MM-dd HH:mm} | Ruta: {routeName} | Pret: {price} lei | Tip loc: {seatType}";
 
         using (StreamWriter writer = new StreamWriter(fileName, append: true))
@@ -31,7 +34,7 @@ public class IstoricCalatorii
     }
     public void ViewHistory(string email)
     {
-        string fileName = GetFileName(email);
+        string fileName = Helper.GetFileName(email);
 
         if (File.Exists(fileName))
         {
