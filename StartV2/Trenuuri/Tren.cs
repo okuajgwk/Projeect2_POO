@@ -14,6 +14,6 @@ public abstract class Tren
         Capacity = capacity;
     }
 
-    public abstract decimal GetPrice();
+  //  public abstract decimal GetPrice();
     
 }
