@@ -22,6 +22,15 @@ public class Route
         Prices = prices;
     }
 
+    public void StopTime(TimeSpan Delay)
+    {
+        foreach (var station in Stations)
+        {
+            station.ArrivalTime=station.ArrivalTime.Add(Delay);
+            station.DepartureTime=station.DepartureTime.Add(Delay);
+        }
+    }
+
     public void ShowRouteDetails()
     {
         Console.WriteLine($"Detalii : {NameRoute}");

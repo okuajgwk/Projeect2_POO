@@ -6,7 +6,7 @@ public abstract class Tren
     private int Number { get; set; }
     private int Capacity { get; set; }
     private List<string> Wagons { get; set; } = new List<string>();
-
+    private Tren TrainType { get; set; }
     protected Tren(string id, int number, int capacity)
     {
         ID = id;
@@ -14,6 +14,6 @@ public abstract class Tren
         Capacity = capacity;
     }
 
-    //public abstract int CalculatePrice();
- 
+    public abstract decimal GetPrice();
+    
 }
