@@ -4,154 +4,161 @@ namespace StartV2;
 
 public class MeniuPrincipal
 {
-    private Identif identif = new Identif();
+    private Identif identif = new Identif(); // Instanță pentru gestionarea utilizatorilor.
+
     public void Cont()
     {
-        Console.WriteLine("1. Creare cont");
-        Console.WriteLine("2. Log in");
-        Console.WriteLine("Alegeti o optiune: ");
-
-        MeniuPrincipal meniuprincipal = new MeniuPrincipal();
-        string opt1 = Console.ReadLine();
         bool running = true;
+
         while (running)
         {
+            Console.WriteLine("--- Meniu Principal ---");
+            Console.WriteLine("1. Creare cont");
+            Console.WriteLine("2. Log in");
+            Console.WriteLine("3. Iesire");
+            Console.WriteLine("Alegeti o optiune: ");
+            
+            string opt1 = Console.ReadLine();
+
             switch (opt1)
             {
                 case "1":
-                    Console.WriteLine("1. Creare cont");
+                    CreareCont();
                     break;
                 case "2":
-                    Console.WriteLine("2. Log in");
+                    LogIn();
                     break;
                 case "3":
-                    Console.WriteLine("Iesire");
+                    Console.WriteLine("Iesire... La revedere!");
                     running = false;
                     break;
                 default:
-                    Console.WriteLine("Optiune invalida. Incercati din nou.");
+                    Console.WriteLine("Optiune invalida. Incercati din nou!");
                     break;
             }
         }
     }
 
-    public void CreareCont(string args)
+    public void CreareCont()
     {
-        Console.WriteLine("-----Sistem de gestionare utilizatori-----");
-        bool running = true;
-        while (running)
+        Console.WriteLine("----- Creare Cont -----");
+        Console.Write("Email: ");
+        string email = Console.ReadLine();
+
+        Console.Write("Parolă: ");
+        string password = Console.ReadLine();
+
+        Console.Write("Prenume: ");
+        string firstName = Console.ReadLine();
+
+        Console.Write("Nume: ");
+        string lastName = Console.ReadLine();
+
+        identif.AddUser(lastName, firstName, email, password);
+        Console.WriteLine("Cont creat cu succes!");
+    }
+
+    public void LogIn()
+    {
+        Console.WriteLine("----- Log In -----");
+        Console.Write("Introduceți email-ul: ");
+        string email = Console.ReadLine();
+
+        Console.Write("Introduceți parola: ");
+        string password = Console.ReadLine();
+
+        if (identif.ValidateUser(email, password))
         {
-
-            Console.WriteLine("1. Adaugare utilizator");
-            Console.WriteLine("2. Listare utilizatori");
-            Console.WriteLine("Iesire");
-            Console.WriteLine("Alegeti o optiune: ");
-            
-            string option = Console.ReadLine();
-
-            switch (option)
+            Console.WriteLine("Autentificare reușită!");
+            if (email.EndsWith("@admin.com", StringComparison.OrdinalIgnoreCase))
             {
-                case "1":
-                    Console.WriteLine("Adaugare utilizator:");
-                    Console.Write("Email: "); 
-                    string email = Console.ReadLine();
-                    Console.Write("Parolă: ");
-                    string password = Console.ReadLine();
-                    Console.Write("Prenume: ");
-                    string firstName = Console.ReadLine();
-                    Console.Write("Nume: ");
-                    string lastName = Console.ReadLine();
-
-                    Identif.AddUser(lastName, firstName, email, password);
-                    break;
-
-                case "2":
-                    Identif.ListUsers();
-                    break;
-
-                case "3":
-                    running = false;
-                    Console.WriteLine("La revedere!");
-                    break;
-
-                default:
-                    Console.WriteLine("Opțiune invalida.");
-                    break;
+                MeniuAdmin();
             }
+            else
+            {
+                MeniuUser();
+            }
+        }
+        else
+        {
+            Console.WriteLine("Autentificare eșuată. Email sau parolă incorecte.");
         }
     }
 
     public void MeniuAdmin()
     {
-        Console.WriteLine("-----Meniu Administrator-----");
-        Console.WriteLine("1. Adaugare ruta");
-        Console.WriteLine("2. Modificare ruta");
-        Console.WriteLine("3. Stergere ruta");
-        Console.WriteLine("4. Gestionare trenuri");
-        Console.WriteLine("5. Semnalare intarziere");
-        Console.WriteLine("6. Iesire");
-        Console.WriteLine("Alegeti o optiune: ");
+        bool adminRunning = true;
 
-        string opt2 = Console.ReadLine();
-        bool running = true;
-        while (running)
+        while (adminRunning)
         {
+            Console.WriteLine("----- Meniu Administrator -----");
+            Console.WriteLine("1. Adaugare ruta");
+            Console.WriteLine("2. Modificare ruta");
+            Console.WriteLine("3. Stergere ruta");
+            Console.WriteLine("4. Gestionare trenuri");
+            Console.WriteLine("5. Semnalare intarziere");
+            Console.WriteLine("6. Iesire");
+            Console.WriteLine("Alegeti o optiune: ");
+
+            string opt2 = Console.ReadLine();
+
             switch (opt2)
             {
                 case "1":
-                    Console.WriteLine("1. Adaugare ruta");
+                    Console.WriteLine("Adaugare ruta...");
                     break;
                 case "2":
-                    Console.WriteLine("2. Modificare ruta");
+                    Console.WriteLine("Modificare ruta...");
                     break;
                 case "3":
-                    Console.WriteLine("3. Stergere ruta");
+                    Console.WriteLine("Stergere ruta...");
                     break;
                 case "4":
-                    Console.WriteLine("4. Gestionare trenuri");
+                    Console.WriteLine("Gestionare trenuri...");
                     break;
                 case "5":
-                    Console.WriteLine("5. Semnalare intarziere");
+                    Console.WriteLine("Semnalare intarziere...");
                     break;
                 case "6":
-                    Console.WriteLine("Iesire");
-                    running = false;
+                    Console.WriteLine("Iesire din Meniu Administrator.");
+                    adminRunning = false;
                     break;
                 default:
                     Console.WriteLine("Optiune invalida. Incercati din nou.");
                     break;
             }
         }
+    }
 
-        static void MeniuUser()
+    public void MeniuUser()
+    {
+        bool userRunning = true;
+
+        while (userRunning)
         {
-            Console.WriteLine("-----Meniu Utilizator-----");
+            Console.WriteLine("----- Meniu Utilizator -----");
             Console.WriteLine("1. Cautare ruta");
             Console.WriteLine("2. Cumparati bilet");
             Console.WriteLine("3. Iesire");
             Console.WriteLine("Alegeti o optiune: ");
 
-            string opt2 = Console.ReadLine();
-            bool running = true;
-            while (running)
+            string opt = Console.ReadLine();
+
+            switch (opt)
             {
-                switch (opt2)
-                {
-                    case "1":
-                        Console.WriteLine("1. Cautare ruta");
-                        break;
-                    case "2":
-                        Console.WriteLine("2. Cumparati bilet");
-                        break;
-                    case "3":
-                        Console.WriteLine("3. Iesire");
-                        break;
-                        running = false;
-                        break;
-                    default:
-                        Console.WriteLine("Optiune invalida. Incercati din nou.");
-                        break;
-                }
+                case "1":
+                    Console.WriteLine("Cautare ruta...");
+                    break;
+                case "2":
+                    Console.WriteLine("Cumparati bilet...");
+                    break;
+                case "3":
+                    Console.WriteLine("Iesire din Meniu Utilizator.");
+                    userRunning = false;
+                    break;
+                default:
+                    Console.WriteLine("Optiune invalida. Incercati din nou.");
+                    break;
             }
         }
     }

@@ -129,6 +129,11 @@ public class Identif
                 $"Email: {user.email}, Tip: {user.userType}, Nume: {user.userFirstName} {user.userLastName}");
         }
     }
+    
+    public bool ValidateUser(string email, string password)
+    {
+        return users.Any(user => user.email.Equals(email, StringComparison.OrdinalIgnoreCase) && user.password == password);
+    }
 
     public bool IsValidEmail(string email)
     {
