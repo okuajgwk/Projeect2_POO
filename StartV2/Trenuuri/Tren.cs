@@ -5,7 +5,7 @@ public abstract class Tren
     private string ID { get; set; }
     private int Number { get; set; }
     private int Capacity { get; set; }
-    private List<Wagon> Wagons { get; protected set; } 
+    private List<Wagon> Wagons { get;  set; } 
 
     protected Tren(string id, int number, int capacity)
     {
